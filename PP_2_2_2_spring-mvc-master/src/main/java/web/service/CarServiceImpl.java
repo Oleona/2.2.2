@@ -1,4 +1,4 @@
-package web.dao;
+package web.service;
 
 import org.springframework.stereotype.Component;
 import web.models.Car;
@@ -7,7 +7,7 @@ import java.util.ArrayList;
 import java.util.List;
 
 @Component
-public class CarDAO implements ICarDAO {
+public class CarServiceImpl implements CarService {
     private static List<Car> listCars = new ArrayList<>();
 
     {
@@ -19,7 +19,10 @@ public class CarDAO implements ICarDAO {
     }
 
     @Override
-    public List<Car> service(int count) {
+    public List<Car> getCars(int count) {
+        if (count < 0 || count > 5) {
+            count = 5;
+        }
         return listCars.stream().limit(count).toList();
     }
 
